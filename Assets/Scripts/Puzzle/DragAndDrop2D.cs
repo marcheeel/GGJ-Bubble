@@ -6,14 +6,34 @@ public class DragAndDrop2D : MonoBehaviour
 {
     [SerializeField] Transform grabbedObject;
     [SerializeField] bool dragging = false;
+    [SerializeField] LayerMask layer;
+
+    Vector3 mousePosition;
 
     private void Update()
     {
-        RaycastHit2D raycastHit2D = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetMouseButton(0))
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, layer);
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            dragging = true;
+            if (raycastHit2D != false)
+            {
+                grabbedObject = raycastHit2D.transform;
+                dragging = true;
+            }
+        }
+        else if (Input.GetKey(KeyCode.Mouse0))
+        {
+            if(dragging) {
+                grabbedObject.position = new Vector3(mousePosition.x, mousePosition.y, 0);
+            }
+        }
+        else if(Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            dragging = false;
+            grabbedObject = null;
         }
     }
 }

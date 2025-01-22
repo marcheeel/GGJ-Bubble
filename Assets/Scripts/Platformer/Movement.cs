@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
 
     [SerializeField] float jumpForce = 5f;
     Rigidbody2D rigidbody2D;
-    bool isGrounded;
+    [SerializeField] bool isGrounded;
 
     SpriteRenderer spriteRenderer;
     [SerializeField] Sprite originalFormSprite;
@@ -53,6 +53,7 @@ public class Movement : MonoBehaviour
                 transformationCollider.enabled = true;
                 originalFormCollider.enabled = false;
                 transformed = true;
+                isGrounded = true;
             }
             else
             {
@@ -60,6 +61,7 @@ public class Movement : MonoBehaviour
                 originalFormCollider.enabled = true;
                 transformationCollider.enabled = false;
                 transformed = false;
+                isGrounded = true;
             }
         }
     }
