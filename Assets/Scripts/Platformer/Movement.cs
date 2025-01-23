@@ -7,19 +7,19 @@ public class Movement : MonoBehaviour
     [SerializeField] float movementSpeed = 5f;
 
     [SerializeField] float jumpForce = 5f;
-    Rigidbody2D rigidbody2D;
+    Rigidbody2D rb2D;
     [SerializeField] bool isGrounded;
 
     SpriteRenderer spriteRenderer;
     [SerializeField] Sprite originalFormSprite;
     [SerializeField] BoxCollider2D originalFormCollider;
-    bool transformed;
+    [SerializeField] bool transformed;
     [SerializeField] Sprite transformationSprite;
     [SerializeField] BoxCollider2D transformationCollider;
 
     private void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rb2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalFormSprite = spriteRenderer.sprite;
         transformed = false;
@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W) && isGrounded == true)
         {
-            rigidbody2D.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+            rb2D.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
         }    
 
         if (h < 0)
