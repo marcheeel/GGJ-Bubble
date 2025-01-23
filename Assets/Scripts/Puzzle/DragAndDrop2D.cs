@@ -4,11 +4,25 @@ using UnityEngine;
 
 public class DragAndDrop2D : MonoBehaviour
 {
+    public static DragAndDrop2D current;
+
     [SerializeField] Transform grabbedObject;
     [SerializeField] bool dragging = false;
     [SerializeField] LayerMask layer;
 
     Vector3 mousePosition;
+
+    private void Awake()
+    {
+        if (current != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            current = this;
+        }
+    }
 
     private void Update()
     {
@@ -20,13 +34,17 @@ public class DragAndDrop2D : MonoBehaviour
         {
             if (raycastHit2D != false)
             {
-                grabbedObject = raycastHit2D.transform;
-                dragging = true;
+                if (raycastHit2D.collider.gameObject.GetComponent<GrabbableObject>().canBeGrabbed == true)
+                {
+                    grabbedObject = raycastHit2D.transform;
+                    dragging = true;
+                }               
             }
         }
         else if (Input.GetKey(KeyCode.Mouse0))
         {
-            if(dragging) {
+            if(dragging) 
+            {
                 grabbedObject.position = new Vector3(mousePosition.x, mousePosition.y, 0);
             }
         }
