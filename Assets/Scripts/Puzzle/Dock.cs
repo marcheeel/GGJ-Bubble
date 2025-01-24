@@ -12,24 +12,53 @@ public class Dock : MonoBehaviour
     
     [Space(10)]
     
-    public int NeedCoins;
+    [SerializeField] private bool unlockedWithCoins;
+    public int coinsNeeded;
     public bool doorOpen;
     [SerializeField] private bool somethingOnDock;
     [SerializeField] private GameObject objectOnDock;
 
     private void Update()
     {
-        if (somethingOnDock == true && Controller.current.money >= NeedCoins)
+        // Con monedas
+        if (unlockedWithCoins)
         {
-            doorAnimator.SetTrigger("Open");
-            doorCollider.enabled = false;
-            doorOpen = true;
+            switch (somethingOnDock)
+            {
+                case true when Controller.current.money >= coinsNeeded && unlockedWithCoins:
+                    doorAnimator.SetTrigger("Open");
+                    Controller.current.money -= coinsNeeded;
+                    doorCollider.enabled = false;
+                    doorOpen = true;
+                    break;
+                
+                case true when Controller.current.money < coinsNeeded:
+                    doorOpen = false;
+                    break;
+                
+                case false:
+                    doorAnimator.SetTrigger("Close");
+                    doorCollider.enabled = true;
+                    doorOpen = false;
+                    break;
+            }
         }
-        else if (somethingOnDock == false)
+        else if (unlockedWithCoins == false)
         {
-            doorAnimator.SetTrigger("Close");
-            doorCollider.enabled = true;
-            doorOpen = false;
+            switch (somethingOnDock)
+            {
+                case true:
+                    doorAnimator.SetTrigger("Open");
+                    Controller.current.money -= coinsNeeded;
+                    doorCollider.enabled = false;
+                    doorOpen = true;
+                    break;
+                case false:
+                    doorAnimator.SetTrigger("Close");
+                    doorCollider.enabled = true;
+                    doorOpen = false;
+                    break;
+            }
         }
     }
 

@@ -1297,8 +1297,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1205349628}
     - target: {fileID: 7317976260709074538, guid: 12521955dad090647911b03f0ecfc181, type: 3}
+      propertyPath: doorOpen
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317976260709074538, guid: 12521955dad090647911b03f0ecfc181, type: 3}
       propertyPath: NeedCoins
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317976260709074538, guid: 12521955dad090647911b03f0ecfc181, type: 3}
+      propertyPath: coinsNeeded
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7317976260709074538, guid: 12521955dad090647911b03f0ecfc181, type: 3}
       propertyPath: doorAnimator
@@ -1308,6 +1316,10 @@ PrefabInstance:
       propertyPath: doorCollider
       value: 
       objectReference: {fileID: 996199328}
+    - target: {fileID: 7317976260709074538, guid: 12521955dad090647911b03f0ecfc181, type: 3}
+      propertyPath: unlockedWithCoins
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
