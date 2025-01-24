@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
-    private static Controller current;
+    public static Controller current;
     
     [SerializeField] Fingers fingers;
     [SerializeField] DragAndDrop2D dragAndDrop;

@@ -965,6 +965,17 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 6039157037855276118, guid: 0119efa32ec1bac46bf4819b43fa8f5f, type: 3}
   m_PrefabInstance: {fileID: 3501467484940537172}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1205349628 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5307869904531884076, guid: f01531ec9954d4146ba1034dcc5770e2, type: 3}
+  m_PrefabInstance: {fileID: 1904609093535850790}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0b06efce15fa764cb5e0f9ad6f0ac4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1845694212
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,6 +1291,14 @@ PrefabInstance:
     - target: {fileID: 5119287257838621460, guid: 12521955dad090647911b03f0ecfc181, type: 3}
       propertyPath: m_Name
       value: PreasurePlate
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317976260709074538, guid: 12521955dad090647911b03f0ecfc181, type: 3}
+      propertyPath: jugador
+      value: 
+      objectReference: {fileID: 1205349628}
+    - target: {fileID: 7317976260709074538, guid: 12521955dad090647911b03f0ecfc181, type: 3}
+      propertyPath: NeedCoins
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317976260709074538, guid: 12521955dad090647911b03f0ecfc181, type: 3}
       propertyPath: doorAnimator

@@ -12,13 +12,14 @@ public class Dock : MonoBehaviour
     
     [Space(10)]
     
+    public int NeedCoins;
     public bool doorOpen;
     [SerializeField] private bool somethingOnDock;
     [SerializeField] private GameObject objectOnDock;
 
     private void Update()
     {
-        if (somethingOnDock == true)
+        if (somethingOnDock == true && Controller.current.money >= NeedCoins)
         {
             doorAnimator.SetTrigger("Open");
             doorCollider.enabled = false;
