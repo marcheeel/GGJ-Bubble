@@ -1318,7 +1318,7 @@ PrefabInstance:
       objectReference: {fileID: 996199328}
     - target: {fileID: 7317976260709074538, guid: 12521955dad090647911b03f0ecfc181, type: 3}
       propertyPath: unlockedWithCoins
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1333,17 +1333,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4978172715948064423, guid: 573a6cb848c34b944893cb5fa49002ba, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5894491955596124574, guid: 573a6cb848c34b944893cb5fa49002ba, type: 3}
       propertyPath: m_Name
       value: Box
       objectReference: {fileID: 0}
     - target: {fileID: 7752922491819396227, guid: 573a6cb848c34b944893cb5fa49002ba, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.55
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7752922491819396227, guid: 573a6cb848c34b944893cb5fa49002ba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.62
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7752922491819396227, guid: 573a6cb848c34b944893cb5fa49002ba, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1376,6 +1380,10 @@ PrefabInstance:
     - target: {fileID: 7752922491819396227, guid: 573a6cb848c34b944893cb5fa49002ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290695023747805938, guid: 573a6cb848c34b944893cb5fa49002ba, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
