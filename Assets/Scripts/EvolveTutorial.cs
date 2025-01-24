@@ -21,6 +21,7 @@ public class EvolveTutorial : MonoBehaviour
 
     private IEnumerator FadeToBlackAndBack()
     {
+        Controller.current.canMove = false;
         yield return StartCoroutine(FadeTo(1.0f, 1.0f));
         
         playerPosition.position = newPosition.transform.position;
@@ -29,6 +30,7 @@ public class EvolveTutorial : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         
         yield return StartCoroutine(FadeTo(0.0f, 1.0f));
+        Controller.current.canMove = true;
         yield return null;
     }
 

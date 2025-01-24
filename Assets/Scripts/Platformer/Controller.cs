@@ -11,18 +11,17 @@ public class Controller : MonoBehaviour
     [SerializeField] Fingers fingers;
     [SerializeField] DragAndDrop2D dragAndDrop;
 
-    [Header("Movement")]
-    [Space(15)]
-
+    [Header("Movement")] 
+    [Space(15)] 
+    public bool canMove;
     [SerializeField] float movementSpeed = 5f;
-
     [SerializeField] float jumpForce = 5f;
     [Space (10)]
     Rigidbody2D rb2D;
     [SerializeField] bool isGrounded;
 
-    [Header("Transformation Spell")] [Space(15)]
-
+    [Header("Transformation Spell")] 
+    [Space(15)]
     public bool transformationUnlocked = false;
     SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite originalFormSprite;
@@ -57,6 +56,8 @@ public class Controller : MonoBehaviour
         {
             current = this;
         }
+        
+        canMove = true;
     }
 
     private void Start()
@@ -78,9 +79,12 @@ public class Controller : MonoBehaviour
     {
         float h = Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime;
 
-        transform.Translate(h, 0, 0);
+        if (canMove)
+        {
+            transform.Translate(h, 0, 0);
+        }
 
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded == true)
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded && canMove)
         {
             rb2D.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
         }    
@@ -96,7 +100,7 @@ public class Controller : MonoBehaviour
             fingers.pointSelector = 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.S) && isGrounded && transformationUnlocked)
+        if (Input.GetKeyDown(KeyCode.S) && isGrounded && canMove && transformationUnlocked)
         {
             if (transformed == false)
             {
