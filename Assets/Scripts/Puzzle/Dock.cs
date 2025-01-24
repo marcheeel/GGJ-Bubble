@@ -23,60 +23,59 @@ public class Dock : MonoBehaviour
         // Con monedas
         if (unlockedWithCoins)
         {
-            switch (somethingOnDock)
-            {
-                case true when Controller.current.money >= coinsNeeded && unlockedWithCoins:
-                    doorAnimator.SetTrigger("Open");
-                    Controller.current.money -= coinsNeeded;
-                    doorCollider.enabled = false;
-                    doorOpen = true;
-                    break;
-                
-                case true when Controller.current.money < coinsNeeded:
-                    doorOpen = false;
-                    break;
-                
-                case false:
-                    doorAnimator.SetTrigger("Close");
-                    doorCollider.enabled = true;
-                    doorOpen = false;
-                    break;
-            }
-        }
-        else if (unlockedWithCoins == false)
-        {
-            switch (somethingOnDock)
-            {
-                case true:
-                    doorAnimator.SetTrigger("Open");
-                    Controller.current.money -= coinsNeeded;
-                    doorCollider.enabled = false;
-                    doorOpen = true;
-                    break;
-                case false:
-                    doorAnimator.SetTrigger("Close");
-                    doorCollider.enabled = true;
-                    doorOpen = false;
-                    break;
-            }
-        }
+           switch (somethingOnDock)
+           {
+               case true when Controller.current.money >= coinsNeeded && unlockedWithCoins:
+                   doorAnimator.SetTrigger("Open");
+                   Controller.current.money -= coinsNeeded;
+                   doorCollider.enabled = false;
+                   doorOpen = true;
+                   break;
+               
+               case true when Controller.current.money < coinsNeeded:
+                   doorOpen = false;
+                   break;
+               
+               case false:
+                   doorAnimator.SetTrigger("Close");
+                   doorCollider.enabled = true;
+                   doorOpen = false;
+                   break;
+           }
+       }
+       else if (unlockedWithCoins == false)
+       {
+           switch (somethingOnDock)
+           {
+               case true:
+                   doorAnimator.SetTrigger("Open");
+                   Controller.current.money -= coinsNeeded;
+                   doorCollider.enabled = false;
+                   doorOpen = true;
+                   break;
+               case false:
+                   doorAnimator.SetTrigger("Close");
+                   doorCollider.enabled = true;
+                   doorOpen = false;
+                   break;
+           }
+       }
     }
-
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Box"))
+        if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Box"))
         {
-            objectOnDock = other.gameObject;
+            objectOnDock = collision.gameObject;
             somethingOnDock = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Box"))
+        if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Box"))
         {
             objectOnDock = null;
-            somethingOnDock = false;
+            somethingOnDock = false ;
         }
     }
 }
