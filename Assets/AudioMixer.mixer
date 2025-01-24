@@ -20,7 +20,7 @@ AudioMixerController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NewAudioMixer
+  m_Name: AudioMixer
   m_OutputGroup: {fileID: 0}
   m_MasterGroup: {fileID: 24300002}
   m_Snapshots:
@@ -31,7 +31,7 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: c1b4fc10c6bdd354e8cf6ad3ab4af3d9
-    name: Dialogo
+    name: Dialogue
   - guid: b9bd47bb9523f0147bb349384d698a0e
     name: Master
   - guid: 78c0114f99b132a4da8a0ba5191a0679
@@ -100,7 +100,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Dialogo
+  m_Name: Dialogue
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 8fe72182bb116dd4cb1825374d9d1b8a
   m_Children: []
