@@ -5,6 +5,8 @@ using UnityEngine;
 public class DragAndDrop2D : MonoBehaviour
 {
     public static DragAndDrop2D current;
+    
+    public bool moveObjectsUnlocked = false;
 
     [SerializeField] Transform grabbedObject;
     [SerializeField] bool dragging = false;
@@ -30,7 +32,7 @@ public class DragAndDrop2D : MonoBehaviour
 
         RaycastHit2D raycastHit2D = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, layer);
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && moveObjectsUnlocked)
         {
             if (raycastHit2D != false)
             {
@@ -41,14 +43,14 @@ public class DragAndDrop2D : MonoBehaviour
                 }               
             }
         }
-        else if (Input.GetKey(KeyCode.Mouse0))
+        else if (Input.GetKey(KeyCode.Mouse0) && moveObjectsUnlocked)
         {
             if(dragging) 
             {
                 grabbedObject.position = new Vector3(mousePosition.x, mousePosition.y, 0);
             }
         }
-        else if(Input.GetKeyUp(KeyCode.Mouse0))
+        else if(Input.GetKeyUp(KeyCode.Mouse0) && moveObjectsUnlocked)
         {
             dragging = false;
             grabbedObject = null;

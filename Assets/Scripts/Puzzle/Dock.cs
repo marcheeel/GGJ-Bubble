@@ -12,7 +12,7 @@ public class Dock : MonoBehaviour
     
     [Space(10)]
     
-    [SerializeField] private bool doorOpen;
+    public bool doorOpen;
     [SerializeField] private bool somethingOnDock;
     [SerializeField] private GameObject objectOnDock;
 
@@ -32,7 +32,7 @@ public class Dock : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player") || other.CompareTag("Box"))
         {

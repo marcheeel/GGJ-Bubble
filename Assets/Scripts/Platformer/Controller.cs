@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Animations;
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
+    private static Controller current;
+    
     [SerializeField] Fingers fingers;
     [SerializeField] DragAndDrop2D dragAndDrop;
 
@@ -18,13 +21,15 @@ public class Controller : MonoBehaviour
     Rigidbody2D rb2D;
     [SerializeField] bool isGrounded;
 
-    SpriteRenderer spriteRenderer;
-    [SerializeField] Sprite originalFormSprite;
-    [SerializeField] BoxCollider2D originalFormCollider;
-    [SerializeField] bool transformed;
-    [SerializeField] Sprite transformationSprite;
-    [SerializeField] BoxCollider2D transformationCollider;
+    [Header("Transformation Spell")] [Space(15)]
 
+    public bool transformationUnlocked = false;
+    SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite originalFormSprite;
+    [SerializeField] private BoxCollider2D originalFormCollider;
+    [SerializeField] private bool transformed;
+    [SerializeField] private Sprite transformationSprite;
+    [SerializeField] private BoxCollider2D transformationCollider;
 
     [Header("Sprites And Animations")]
     [Space(15)]
@@ -42,6 +47,18 @@ public class Controller : MonoBehaviour
 
     public int money;
 
+    private void Awake()
+    {
+        if (current != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            current = this;
+        }
+    }
+
     private void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -53,6 +70,8 @@ public class Controller : MonoBehaviour
         fingers = GetComponent<Fingers>();
 
         dragAndDrop = FindAnyObjectByType<DragAndDrop2D>();
+        
+        transformationUnlocked = false;
     }
 
     private void Update()
@@ -77,7 +96,7 @@ public class Controller : MonoBehaviour
             fingers.pointSelector = 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.S) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.S) && isGrounded && transformationUnlocked)
         {
             if (transformed == false)
             {
