@@ -264,7 +264,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ef2fea1e4d371f64099352fb71f9cd82, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -314,6 +314,7 @@ MonoBehaviour:
   movementSpeed: 5
   jumpForce: 5
   isGrounded: 0
+  transformationUnlocked: 0
   originalFormSprite: {fileID: 0}
   originalFormCollider: {fileID: 5523301550272937410}
   transformed: 0
