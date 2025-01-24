@@ -122,8 +122,10 @@ public class Controller : MonoBehaviour
         if (hp <= 0) 
         { 
             hp = 0;
-            Destroy(gameObject);
-            //Game Over
+            
+            // Reproducir animación de muerte
+            
+            StartCoroutine(SaveSystem.current.BackToCheckpoint());
         }
         else if (hp == 3)
         {

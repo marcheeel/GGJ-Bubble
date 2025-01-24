@@ -8,6 +8,7 @@ TagManager:
   - Box
   - Enemy
   - Coin
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
