@@ -12,11 +12,11 @@ public class DragAndDrop2D : MonoBehaviour
     [Header("Tutorial Mode")]
     [Space(10)]
     [SerializeField] private bool tutorial;
+    public bool moveObjectsUnlocked = false;
     [Space(15)]
     
     public static DragAndDrop2D current;
     
-    public bool moveObjectsUnlocked = false;
 
     [SerializeField] Transform grabbedObject;
     [SerializeField] bool dragging = false;

@@ -11,7 +11,8 @@ public class Fingers : MonoBehaviour
     
     [Header("Tutorial Mode")]
     [Space(10)]
-    [SerializeField] private bool tutorial;
+    [SerializeField] private bool tutorial;    
+    public bool fingersUnlocked = false;
     [Space(15)]
     
     [SerializeField] GameObject spell;

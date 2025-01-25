@@ -22,7 +22,6 @@ public class Controller : MonoBehaviour
 
     [Header("Transformation Spell")] 
     [Space(15)]
-    public bool transformationUnlocked = false;
     SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite originalFormSprite;
     [SerializeField] private BoxCollider2D originalFormCollider;
@@ -38,6 +37,7 @@ public class Controller : MonoBehaviour
     [Header("Tutorial Mode")]
     [Space(10)]
     [SerializeField] private bool tutorial;
+    public bool transformationUnlocked = false;
     [Space(15)]
     
     [Header("Sprites And Animations")]
