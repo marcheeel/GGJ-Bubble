@@ -18,11 +18,15 @@ public class Spell : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (collision.gameObject.GetComponent<Enemy>() != null)
+        if (collision.gameObject.GetComponent<Enemy_Goblin>() != null)
         {
-            collision.gameObject.GetComponent<Enemy>().hp--;
-            collision.gameObject.GetComponent<Enemy>().CheckHP();
-            Destroy(gameObject);
+            collision.gameObject.GetComponent<Enemy_Goblin>().hp--;
+            collision.gameObject.GetComponent<Enemy_Goblin>().CheckHP();
+        }
+        else if (collision.gameObject.GetComponent<Enemy_Slime>() != null)
+        {
+            collision.gameObject.GetComponent<Enemy_Slime>().hp--;
+            collision.gameObject.GetComponent<Enemy_Slime>().CheckHP();
         }
     }
 }

@@ -226,7 +226,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 5
 --- !u!58 &7625176907848772506
 CircleCollider2D:
@@ -298,9 +298,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb270ca8242a30489d9510d68c34c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 7703985384771060829}
+  tutorial: 1
   hp: 2
   arrowSpeed: 8
-  anim: {fileID: 7703985384771060829}
   arrow: {fileID: 9092266793399071262, guid: 341bc83a16a97624fb23a42497db2504, type: 3}
   firePoint: {fileID: 0}
   leftPoint: {fileID: 3126855333761732531}

@@ -1,27 +1,57 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy_Goblin : MonoBehaviour
 {
+    [Header("Animations")]
+    [Space(10)]
+    [SerializeField] private Animator anim;
+    [Space(15)]
+    
+    [Header("Tutorial Mode")]
+    [Space(10)]
+    [SerializeField] private bool tutorial;
+    [Space(15)]
+    
+    [Header("Stats")]
+    [Space(10)]
     public int hp = 2;
     [SerializeField] float arrowSpeed = 10;
-    [SerializeField] Animator anim;
     [SerializeField] GameObject arrow;
-
+    [Space(5)]
     [SerializeField] Transform firePoint;
     [SerializeField] Transform leftPoint;
     [SerializeField] Transform rightPoint;
-
+    [Space(5)]
     [SerializeField] Vector3 playerPos;
     [SerializeField] bool playerInRange;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     public void CheckHP()
     {
         if (hp <= 0)
         {
+            hp = 0;
+            if (!tutorial)
+            {
+                anim.SetTrigger("death");
+            }
+
             Destroy(gameObject);
+        }
+        else
+        {
+            if (!tutorial)
+            {
+                anim.SetTrigger("hurt");
+            }
         }
     }
 
@@ -31,7 +61,11 @@ public class Enemy : MonoBehaviour
         {
             playerPos = collision.transform.position;
             playerInRange = true;
-            anim.SetTrigger("attack");
+            
+            if (!tutorial)
+            {
+                anim.SetTrigger("attack");
+            }
         }
     }
 
@@ -45,6 +79,8 @@ public class Enemy : MonoBehaviour
 
     private void Attack()
     {
+        // Call it on animation event at the end of charging the bow 
+        
         Transform actualPlayerPos = FindAnyObjectByType<Fingers>().GetComponent<Transform>();
 
         float distanceLeft = Vector3.Distance(playerPos, leftPoint.position);
