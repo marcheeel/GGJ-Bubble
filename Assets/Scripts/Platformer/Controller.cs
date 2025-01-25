@@ -32,7 +32,7 @@ public class Controller : MonoBehaviour
 
     [Header("Sprites And Animations")]
     [Space(15)]
-    [SerializeField] private int hp = 3;
+    [SerializeField] public int hp = 3;
     [SerializeField] private Animator animator;
     [Space(10)]
     [SerializeField] private Sprite fullHpSprite;
