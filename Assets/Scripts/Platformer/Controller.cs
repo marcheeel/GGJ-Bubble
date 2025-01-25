@@ -30,10 +30,19 @@ public class Controller : MonoBehaviour
     [SerializeField] private Sprite transformationSprite;
     [SerializeField] private BoxCollider2D transformationCollider;
 
+    [Header("Animations")]
+    [Space(10)]
+    [SerializeField] private Animator anim;
+    [Space(15)]
+    
+    [Header("Tutorial Mode")]
+    [Space(10)]
+    [SerializeField] private bool tutorial;
+    [Space(15)]
+    
     [Header("Sprites And Animations")]
     [Space(15)]
     [SerializeField] public int hp = 3;
-    [SerializeField] private Animator animator;
     [Space(10)]
     [SerializeField] private Sprite fullHpSprite;
     [SerializeField] private RuntimeAnimatorController fullHpAnimations;
@@ -63,7 +72,8 @@ public class Controller : MonoBehaviour
     private void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-
+        
+        anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalFormSprite = spriteRenderer.sprite;
         transformed = false;
@@ -87,21 +97,49 @@ public class Controller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && isGrounded && canMove)
         {
             rb2D.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+            if (!tutorial)
+            {
+                anim.SetTrigger("jump");
+            }
         }    
 
         if (h < 0)
         {
             spriteRenderer.flipX = true;
+            if (!tutorial)
+            {
+                anim.SetFloat("speed", 1);
+            }
             fingers.pointSelector = 0;
         }
         else if (h > 0)
         {
             spriteRenderer.flipX = false;
+            if (!tutorial)
+            {
+                anim.SetFloat("speed", 1);
+            }
             fingers.pointSelector = 1;
         }
-
+        else if (h == 0)
+        {
+            if (!tutorial)
+            {
+                anim.SetFloat("speed", 0);
+            }
+        }
+        
         if (Input.GetKeyDown(KeyCode.S) && isGrounded && canMove && transformationUnlocked)
         {
+            if (!tutorial)
+            {
+                anim.SetBool("transform", true);
+            }
+            else
+            {
+                anim.SetBool("transform", false);
+            }
+            
             if (transformed == false)
             {
                 spriteRenderer.sprite = transformationSprite;
@@ -127,24 +165,37 @@ public class Controller : MonoBehaviour
         { 
             hp = 0;
             
-            // Reproducir animación de muerte
+            if (!tutorial)
+            {
+                anim.SetTrigger("death");
+                // iniciar fade in fade out
+            }
             
             StartCoroutine(SaveSystem.current.BackToCheckpoint());
         }
         else if (hp == 3)
         {
             spriteRenderer.sprite = fullHpSprite;
-            animator.runtimeAnimatorController = fullHpAnimations;
+            if (!tutorial)
+            {
+                anim.runtimeAnimatorController = fullHpAnimations;
+            }
         }
         else if (hp == 2)
         {
             spriteRenderer.sprite = lightDamagedSprite;
-            animator.runtimeAnimatorController = lightDamagedAnimations;
+            if (!tutorial)
+            {
+                anim.runtimeAnimatorController = lightDamagedAnimations;
+            }
         }
         else if (hp == 1)
         {
             spriteRenderer.sprite = seriouslyDamagedSprite;
-            animator.runtimeAnimatorController = seriouslyDamagedAnimations;
+            if (!tutorial)
+            {
+                anim.runtimeAnimatorController = seriouslyDamagedAnimations;
+            }
         }
     }
 

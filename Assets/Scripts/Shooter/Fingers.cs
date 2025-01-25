@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class Fingers : MonoBehaviour
 {
+    [Header("Animations")]
+    [Space(10)]
+    [SerializeField] private Animator anim;
+    [Space(15)]
+    
+    [Header("Tutorial Mode")]
+    [Space(10)]
+    [SerializeField] private bool tutorial;
+    [Space(15)]
+    
     [SerializeField] GameObject spell;
 
     [SerializeField] private float fireRate;
@@ -38,12 +48,23 @@ public class Fingers : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && canFire)
         {
+            switch (tutorial)
+            {
+                case false when pointSelector == 0:
+                    anim.SetTrigger("attackleft");
+                    break;
+                case false when pointSelector == 1:
+                    anim.SetTrigger("attackright");
+                    break;
+            }
+
             StartCoroutine(FingersCooldown(fireRate));
         }
     }
 
     private IEnumerator FingersCooldown(float time)
     {         
+        
         GameObject InstanciatedSpell = Instantiate(spell, firePoint.position, firePoint.rotation);
         Rigidbody2D rbSpell = InstanciatedSpell.GetComponent<Rigidbody2D>();
         Vector3 direction = (firePoint.position - (Vector3)transform.position).normalized;

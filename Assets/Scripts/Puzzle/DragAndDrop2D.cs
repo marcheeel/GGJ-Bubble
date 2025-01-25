@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class DragAndDrop2D : MonoBehaviour
 {
+    [Header("Animations")]
+    [Space(10)]
+    [SerializeField] private Animator anim;
+    [Space(15)]
+    
+    [Header("Tutorial Mode")]
+    [Space(10)]
+    [SerializeField] private bool tutorial;
+    [Space(15)]
+    
     public static DragAndDrop2D current;
     
     public bool moveObjectsUnlocked = false;
@@ -38,7 +48,12 @@ public class DragAndDrop2D : MonoBehaviour
             {
                 if (raycastHit2D.collider.gameObject.GetComponent<GrabbableObject>().canBeGrabbed == true)
                 {
+                    anim = raycastHit2D.collider.gameObject.GetComponent<Animator>();
                     grabbedObject = raycastHit2D.transform;
+                    if (!tutorial)
+                    {
+                        anim.SetBool("grabbing", true);
+                    }
                     dragging = true;
                 }               
             }
@@ -54,6 +69,11 @@ public class DragAndDrop2D : MonoBehaviour
         {
             dragging = false;
             grabbedObject = null;
+            
+            if (!tutorial)
+            {
+                anim.SetBool("grabbing", false);
+            }
         }
     }
 }
