@@ -12,7 +12,14 @@ public class SoundManager : MonoBehaviour
     public GameObject pauseMenu;
 
     public AudioMixer audioMixer;
+    [Header("Audio Sources")]
+    [Space(5)]
+    public AudioSource BGM;
+    public AudioSource SFX;
+    public AudioSource dialogue;
 
+    [Header("Sliders")]
+    [Space(5)]
     public Slider masterVolumeSlider;
     public Slider BGMVolumeSlider;
     public Slider SFXVolumeSlider;

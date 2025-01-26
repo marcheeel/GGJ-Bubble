@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class UnlockFingers : MonoBehaviour
 {
+    [SerializeField] private bool tutorial;
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -12,7 +14,14 @@ public class UnlockFingers : MonoBehaviour
             Controller.current.GetComponent<Fingers>().fingersUnlocked = true;
             
             transform.SetParent(other.transform);
-            Destroy(this);
+            if (tutorial)
+            {
+                Destroy(this);
+            }
+            else if (tutorial == false)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

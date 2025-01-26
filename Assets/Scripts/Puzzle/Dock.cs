@@ -7,6 +7,8 @@ using UnityEngine.Serialization;
 
 public class Dock : MonoBehaviour
 {
+    [SerializeField] AudioSource dockAudioSource;
+    
     [SerializeField] BoxCollider2D doorCollider;
     [SerializeField] Animator doorAnimator;
     
@@ -18,6 +20,11 @@ public class Dock : MonoBehaviour
     [SerializeField] private bool somethingOnDock;
     [SerializeField] private Animator dockAnimator;
     [SerializeField] private GameObject objectOnDock;
+
+    private void Start()
+    {
+        dockAudioSource = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
@@ -31,6 +38,7 @@ public class Dock : MonoBehaviour
                 {
                     case true when Controller.current.money >= coinsNeeded && unlockedWithCoins:
                         doorAnimator.SetTrigger("open");
+                        dockAudioSource.Play();
                         Controller.current.money -= coinsNeeded;
                         doorCollider.enabled = false;
                         doorOpen = true;
@@ -53,6 +61,7 @@ public class Dock : MonoBehaviour
                 {
                     case true:
                         doorAnimator.SetTrigger("open");
+                        dockAudioSource.Play();
                         Controller.current.money -= coinsNeeded;
                         doorCollider.enabled = false;
                         doorOpen = true;

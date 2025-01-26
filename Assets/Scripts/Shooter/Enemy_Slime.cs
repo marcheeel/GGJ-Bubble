@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 
 public class Enemy_Slime : MonoBehaviour
 {
+    private AudioSource slimeAudioSource;
     
     [Header("Animations")]
     [Space(10)]
@@ -42,7 +43,8 @@ public class Enemy_Slime : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
-        
+        slimeAudioSource = GetComponent<AudioSource>();
+
         currentTarget = waypointA;
     }
     
@@ -55,44 +57,41 @@ public class Enemy_Slime : MonoBehaviour
 
         if (canChasePlayer && playerPos != null && jumpCooldown <= 0)
         {
-            Vector2 direction = (playerPos.position - transform.position).normalized;
-            Vector2 jumpVector = new Vector2(direction.x * moveSpeed, jumpForce);
-            
-            if (!tutorial)
-            {
-                anim.SetTrigger("jump");
-            }
-
-            rigidbody2D.velocity = jumpVector;
-            jumpCooldown = timeBetweenJumps;
-
-            if (direction.x > 0 && transform.localScale.x < 0 || direction.x < 0 && transform.localScale.x > 0)
-            {
-                Flip();
-            }
+            JumpTowards(playerPos.position);
         }
         else if (!canChasePlayer && jumpCooldown <= 0)
         {
-            Vector2 direction = (currentTarget.position - transform.position).normalized;
-            Vector2 jumpVector = new Vector2(direction.x * moveSpeed, jumpForce);
-
-            if (!tutorial)
-            {
-                anim.SetTrigger("jump");
-            }
-
-            rigidbody2D.velocity = jumpVector;
-            jumpCooldown = timeBetweenJumps;
-
-            if (direction.x > 0 && transform.localScale.x < 0 || direction.x < 0 && transform.localScale.x > 0)
-            {
-                Flip();
-            }
+            JumpTowards(currentTarget.position);
 
             if (Vector2.Distance(transform.position, currentTarget.position) < 1.5f)
             {
                 currentTarget = currentTarget == waypointA ? waypointB : waypointA;
             }
+        }
+    }
+
+    private void JumpTowards(Vector2 targetPosition)
+    {
+        Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
+        Vector2 jumpVector = new Vector2(direction.x * moveSpeed, rigidbody2D.velocity.y + jumpForce);
+
+        if (!tutorial)
+        {
+            anim.SetTrigger("jump");
+        }
+
+        rigidbody2D.velocity = jumpVector;
+
+        if (slimeAudioSource != null)
+        {
+            slimeAudioSource.Play();
+        }
+
+        jumpCooldown = timeBetweenJumps;
+
+        if ((direction.x > 0 && transform.localScale.x < 0) || (direction.x < 0 && transform.localScale.x > 0))
+        {
+            Flip();
         }
     }
     

@@ -10,6 +10,20 @@ public class Controller : MonoBehaviour
     
     [SerializeField] Fingers fingers;
     [SerializeField] DragAndDrop2D dragAndDrop;
+    
+    [Header("Audio")] 
+    [Space(15)] 
+    public AudioSource playerAudioSource;
+    [Space(5)]
+    public AudioClip jumpClip;
+    public AudioClip walkClip;
+    public AudioClip hurtClip;
+    public AudioClip deathClip;
+    public AudioClip transformationClip;
+    [Space(5)]
+    public AudioClip catJumpClip;
+    public AudioClip catWalkClip;
+    [Space(15)]
 
     [Header("Movement")] 
     [Space(15)] 
@@ -19,6 +33,7 @@ public class Controller : MonoBehaviour
     [Space (10)]
     Rigidbody2D rb2D;
     [SerializeField] bool isGrounded;
+    [Space(15)]
 
     [Header("Transformation Spell")] 
     [Space(15)]
@@ -28,6 +43,7 @@ public class Controller : MonoBehaviour
     [SerializeField] private bool transformed;
     [SerializeField] private Sprite transformationSprite;
     [SerializeField] private BoxCollider2D transformationCollider;
+    [Space(15)]
 
     [Header("Animations")]
     [Space(10)]
@@ -77,6 +93,8 @@ public class Controller : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalFormSprite = spriteRenderer.sprite;
         transformed = false;
+        
+        playerAudioSource = GetComponent<AudioSource>();
 
         fingers = GetComponent<Fingers>();
 
@@ -97,6 +115,19 @@ public class Controller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && isGrounded && canMove)
         {
             rb2D.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+            
+            if (transformed == true)
+            {
+                playerAudioSource.clip = catJumpClip;
+                playerAudioSource.Play();
+
+            }
+            else
+            {
+                playerAudioSource.clip = jumpClip;
+                playerAudioSource.Play();
+            }
+            
             if (!tutorial)
             {
                 anim.SetTrigger("jump");
@@ -106,6 +137,19 @@ public class Controller : MonoBehaviour
         if (h < 0)
         {
             spriteRenderer.flipX = true;
+            
+            if (transformed == true)
+            {
+                playerAudioSource.clip = catWalkClip;
+                playerAudioSource.Play();
+
+            }
+            else
+            {
+                playerAudioSource.clip = walkClip;
+                playerAudioSource.Play();
+            }
+            
             if (!tutorial)
             {
                 anim.SetFloat("speed", 1);
@@ -115,6 +159,19 @@ public class Controller : MonoBehaviour
         else if (h > 0)
         {
             spriteRenderer.flipX = false;
+            
+            if (transformed == true)
+            {
+                playerAudioSource.clip = catWalkClip;
+                playerAudioSource.Play();
+
+            }
+            else
+            {
+                playerAudioSource.clip = walkClip;
+                playerAudioSource.Play();
+            }
+            
             if (!tutorial)
             {
                 anim.SetFloat("speed", 1);
@@ -131,6 +188,9 @@ public class Controller : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.S) && isGrounded && canMove && transformationUnlocked)
         {
+            playerAudioSource.clip = transformationClip;
+            playerAudioSource.Play();
+            
             if (!tutorial)
             {
                 anim.SetBool("transform", true);
@@ -167,8 +227,9 @@ public class Controller : MonoBehaviour
             
             if (!tutorial)
             {
+                playerAudioSource.clip = deathClip;
+                playerAudioSource.Play();
                 anim.SetTrigger("death");
-                // iniciar fade in fade out
             }
             
             StartCoroutine(SaveSystem.current.BackToCheckpoint());
@@ -209,6 +270,9 @@ public class Controller : MonoBehaviour
         if (collision.collider.CompareTag("Enemy"))
         {
             hp--;
+            anim.SetTrigger("hurt");
+            playerAudioSource.clip = hurtClip;
+            playerAudioSource.Play();
             CheckHP();
         }      
     }

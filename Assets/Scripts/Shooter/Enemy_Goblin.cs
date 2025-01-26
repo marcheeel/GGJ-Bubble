@@ -3,9 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Enemy_Goblin : MonoBehaviour
 {
+    [Header("Audio")]
+    [Space(10)]
+    [SerializeField] private AudioSource goblinAudioSource;
+    [Space(5)]
+    [SerializeField] private AudioClip chargeBowClip;
+    [SerializeField] private AudioClip shootArrowClip;
+    [Space(15)]
+
     [Header("Animations")]
     [Space(10)]
     [SerializeField] private Animator anim;
@@ -32,6 +41,7 @@ public class Enemy_Goblin : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
+        goblinAudioSource = GetComponent<AudioSource>();
     }
 
     public void CheckHP()
@@ -65,6 +75,8 @@ public class Enemy_Goblin : MonoBehaviour
             if (!tutorial)
             {
                 anim.SetTrigger("attack");
+                goblinAudioSource.clip = chargeBowClip;
+                goblinAudioSource.Play();
             }
         }
     }
@@ -99,5 +111,7 @@ public class Enemy_Goblin : MonoBehaviour
         Rigidbody2D rbArrow = InstanciatedArrow.GetComponent<Rigidbody2D>();
         Vector3 direction = ((Vector3)actualPlayerPos.position - firePoint.position).normalized;
         rbArrow.AddForce(direction * arrowSpeed, ForceMode2D.Impulse);
+        goblinAudioSource.clip = shootArrowClip;
+        goblinAudioSource.Play();
     }
 }

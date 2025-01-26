@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Fingers : MonoBehaviour
 {
     [Header("Animations")]
     [Space(10)]
     [SerializeField] private Animator anim;
+    [SerializeField] private AudioSource fingersAudioSource;
+    [Space(5)]
+    [SerializeField] private AudioClip fingersClip;
     [Space(15)]
     
     [Header("Tutorial Mode")]
@@ -53,6 +57,9 @@ public class Fingers : MonoBehaviour
             {
                 anim.SetTrigger("attack");
             }
+            
+            fingersAudioSource.clip = fingersClip;
+            fingersAudioSource.Play();
 
             StartCoroutine(FingersCooldown(fireRate));
         }

@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class SaveSystem : MonoBehaviour
 {
     public static SaveSystem current;
     
     public UnityEngine.UI.Image blackScreen;
+    
+    public TextMeshProUGUI coinsText;
 
     private void Awake()
     {
@@ -24,6 +27,11 @@ public class SaveSystem : MonoBehaviour
         Color color = blackScreen.color;
         color.a = 0;
         blackScreen.color = color;
+    }
+
+    private void Update()
+    {
+        coinsText.text = "\u00d7 " + Controller.current.money;
     }
 
     public IEnumerator BackToCheckpoint()
