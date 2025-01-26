@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spell : MonoBehaviour
 {
+    public bool tutorial;
     [SerializeField] float spellDuration;
     
     [SerializeField] AudioSource spellAudioSource;
@@ -17,19 +18,28 @@ public class Spell : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Box"))
         {
-            spellAudioSource.Play();
+            if (!tutorial)
+            {
+                spellAudioSource.Play();
+            }
             Destroy(gameObject);
         }
 
         if (collision.gameObject.GetComponent<Enemy_Goblin>() != null)
         {
-            spellAudioSource.Play();
+            if (!tutorial)
+            {
+                spellAudioSource.Play();
+            }
             collision.gameObject.GetComponent<Enemy_Goblin>().hp--;
             collision.gameObject.GetComponent<Enemy_Goblin>().CheckHP();
         }
         else if (collision.gameObject.GetComponent<Enemy_Slime>() != null)
         {
-            spellAudioSource.Play();
+            if (!tutorial)
+            {
+                spellAudioSource.Play();
+            }
             collision.gameObject.GetComponent<Enemy_Slime>().hp--;
             collision.gameObject.GetComponent<Enemy_Slime>().CheckHP();
         }
@@ -37,7 +47,10 @@ public class Spell : MonoBehaviour
                  collision.gameObject.GetComponent<Enemy_Slime>() == null &&
                  collision.gameObject.CompareTag("Enemy"))
         {
-            spellAudioSource.Play();
+            if (!tutorial)
+            {
+                spellAudioSource.Play();
+            }
             Destroy(gameObject); 
         }
     }

@@ -8,5 +8,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: d9d51faa5ca224146a7731f6d68ee954
+  - enabled: 1
+    path: Assets/Scenes/Metroidvania.unity
+    guid: eee206c03b59b9049b73b7bb836dd22f
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

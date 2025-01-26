@@ -21,13 +21,16 @@ public class GrabbableObject : MonoBehaviour
 
     private void Start()
     {
-        stoneAudioSource = GetComponent<AudioSource>();
-        stoneAudioSource.loop = true;
+        if (!tutorial)
+        {
+            stoneAudioSource = GetComponent<AudioSource>();
+            stoneAudioSource.loop = true;
+        }
     }
 
     private void Update()
     {
-        if (DragAndDrop2D.current.dragging == true)
+        if (DragAndDrop2D.current.dragging == true && !tutorial)
         {
             stoneAudioSource.Play();
         }

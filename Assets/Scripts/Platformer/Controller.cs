@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class Controller : MonoBehaviour
@@ -116,7 +115,7 @@ public class Controller : MonoBehaviour
         {
             rb2D.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
             
-            if (transformed == true)
+            if (transformed == true && !tutorial)
             {
                 playerAudioSource.clip = catJumpClip;
                 playerAudioSource.Play();
@@ -138,13 +137,13 @@ public class Controller : MonoBehaviour
         {
             spriteRenderer.flipX = true;
             
-            if (transformed == true)
+            if (transformed == true && !tutorial)
             {
                 playerAudioSource.clip = catWalkClip;
                 playerAudioSource.Play();
 
             }
-            else
+            else 
             {
                 playerAudioSource.clip = walkClip;
                 playerAudioSource.Play();
@@ -160,7 +159,7 @@ public class Controller : MonoBehaviour
         {
             spriteRenderer.flipX = false;
             
-            if (transformed == true)
+            if (transformed == true && !tutorial)
             {
                 playerAudioSource.clip = catWalkClip;
                 playerAudioSource.Play();
@@ -188,8 +187,11 @@ public class Controller : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.S) && isGrounded && canMove && transformationUnlocked)
         {
-            playerAudioSource.clip = transformationClip;
-            playerAudioSource.Play();
+            if (!tutorial)
+            {
+                playerAudioSource.clip = transformationClip;
+                playerAudioSource.Play();
+            }
             
             if (!tutorial)
             {
@@ -271,8 +273,11 @@ public class Controller : MonoBehaviour
         {
             hp--;
             anim.SetTrigger("hurt");
-            playerAudioSource.clip = hurtClip;
-            playerAudioSource.Play();
+            if (!tutorial)
+            {
+                playerAudioSource.clip = hurtClip;
+                playerAudioSource.Play();
+            }
             CheckHP();
         }      
     }

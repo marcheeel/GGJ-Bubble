@@ -3,6 +3,13 @@ using UnityEngine;
 
 public class EvolveTutorial : MonoBehaviour
 {
+    public AudioSource dialogueSource;
+    public AudioSource BGMSource;
+
+    public AudioClip dialogueLineClip;
+
+    public AudioClip NewBGMClip;
+    
     public UnityEngine.UI.Image blackScreen;
     [SerializeField] private Transform playerPosition;
     [SerializeField] private GameObject newPosition;
@@ -15,6 +22,11 @@ public class EvolveTutorial : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerPosition = other.transform;
+            dialogueSource.clip = dialogueLineClip;
+            dialogueSource.Play();
+            
+            BGMSource.Stop();
+            BGMSource.clip = NewBGMClip;
             StartCoroutine(FadeToBlackAndBack());
         }
     }
@@ -30,6 +42,7 @@ public class EvolveTutorial : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         
         yield return StartCoroutine(FadeTo(0.0f, 1.0f));
+        BGMSource.Play();
         Controller.current.canMove = true;
         yield return null;
     }

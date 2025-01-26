@@ -6,10 +6,15 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     public AudioSource coinAudioSource;
+    
+    public bool tutorial;
 
     private void Start()
     {
-        coinAudioSource = GetComponent<AudioSource>();
+        if (!tutorial)
+        {
+            coinAudioSource = GetComponent<AudioSource>();  
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -17,7 +22,10 @@ public class Coin : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.GetComponent<Controller>().money++;
-            coinAudioSource.Play();
+            if (!tutorial)
+            {
+                coinAudioSource.Play();
+            }
             Destroy(gameObject);
         }
     }

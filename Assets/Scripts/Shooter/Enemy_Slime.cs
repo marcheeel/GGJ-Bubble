@@ -43,7 +43,10 @@ public class Enemy_Slime : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
-        slimeAudioSource = GetComponent<AudioSource>();
+        if (!tutorial)
+        {
+            slimeAudioSource = GetComponent<AudioSource>();
+        }
 
         currentTarget = waypointA;
     }

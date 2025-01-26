@@ -6,10 +6,15 @@ using UnityEngine;
 public class UnlockTransformation : MonoBehaviour
 {
     public AudioSource coinAudioSource;
+    
+    public bool tutorial;
 
     private void Start()
     {
-        coinAudioSource = GetComponent<AudioSource>();
+        if (!tutorial)
+        {
+            coinAudioSource = GetComponent<AudioSource>();  
+        }
     }
     
     void OnTriggerEnter2D(Collider2D other)
@@ -17,7 +22,10 @@ public class UnlockTransformation : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Controller.current.transformationUnlocked = true;
-            coinAudioSource.Play();
+            if (!tutorial)
+            {
+                coinAudioSource.Play();
+            }
             Destroy(gameObject);
         }
     }
