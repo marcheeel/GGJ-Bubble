@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DragAndDrop2D : MonoBehaviour
 {
+    [SerializeField] AudioSource dragAudioSource;
+    
     [Header("Animations")]
     [Space(10)]
     [SerializeField] private Animator anim;
@@ -17,9 +19,8 @@ public class DragAndDrop2D : MonoBehaviour
     
     public static DragAndDrop2D current;
     
-
     [SerializeField] Transform grabbedObject;
-    [SerializeField] bool dragging = false;
+    public bool dragging = false;
     [SerializeField] LayerMask layer;
 
     Vector3 mousePosition;
@@ -50,6 +51,7 @@ public class DragAndDrop2D : MonoBehaviour
                 {
                     anim = raycastHit2D.collider.gameObject.GetComponent<Animator>();
                     grabbedObject = raycastHit2D.transform;
+                    dragAudioSource.Play();
                     if (!tutorial)
                     {
                         anim.SetBool("grabbing", true);
@@ -72,6 +74,7 @@ public class DragAndDrop2D : MonoBehaviour
             
             if (!tutorial)
             {
+                dragAudioSource.Stop();
                 anim.SetBool("grabbing", false);
             }
         }
