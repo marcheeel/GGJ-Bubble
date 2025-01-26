@@ -49,14 +49,9 @@ public class Fingers : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && canFire)
         {
-            switch (tutorial)
+            if (!tutorial)
             {
-                case false when pointSelector == 0:
-                    anim.SetTrigger("attackleft");
-                    break;
-                case false when pointSelector == 1:
-                    anim.SetTrigger("attackright");
-                    break;
+                anim.SetTrigger("attack");
             }
 
             StartCoroutine(FingersCooldown(fireRate));

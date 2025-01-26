@@ -20,46 +20,48 @@ public class Dock : MonoBehaviour
 
     private void Update()
     {
-        // Con monedas
-        if (unlockedWithCoins)
+        switch (unlockedWithCoins)
         {
-           switch (somethingOnDock)
-           {
-               case true when Controller.current.money >= coinsNeeded && unlockedWithCoins:
-                   doorAnimator.SetTrigger("Open");
-                   Controller.current.money -= coinsNeeded;
-                   doorCollider.enabled = false;
-                   doorOpen = true;
-                   break;
+            // Con monedas
+            case true:
+                switch (somethingOnDock)
+                {
+                    case true when Controller.current.money >= coinsNeeded && unlockedWithCoins:
+                        doorAnimator.SetTrigger("open");
+                        Controller.current.money -= coinsNeeded;
+                        doorCollider.enabled = false;
+                        doorOpen = true;
+                        break;
                
-               case true when Controller.current.money < coinsNeeded:
-                   doorOpen = false;
-                   break;
+                    case true when Controller.current.money < coinsNeeded:
+                        doorOpen = false;
+                        break;
                
-               case false:
-                   doorAnimator.SetTrigger("Close");
-                   doorCollider.enabled = true;
-                   doorOpen = false;
-                   break;
-           }
-       }
-       else if (unlockedWithCoins == false)
-       {
-           switch (somethingOnDock)
-           {
-               case true:
-                   doorAnimator.SetTrigger("Open");
-                   Controller.current.money -= coinsNeeded;
-                   doorCollider.enabled = false;
-                   doorOpen = true;
-                   break;
-               case false:
-                   doorAnimator.SetTrigger("Close");
-                   doorCollider.enabled = true;
-                   doorOpen = false;
-                   break;
-           }
-       }
+                    case false:
+                        doorAnimator.SetTrigger("close");
+                        doorCollider.enabled = true;
+                        doorOpen = false;
+                        break;
+                }
+                break;
+            
+            case false:
+                switch (somethingOnDock)
+                {
+                    case true:
+                        doorAnimator.SetTrigger("open");
+                        Controller.current.money -= coinsNeeded;
+                        doorCollider.enabled = false;
+                        doorOpen = true;
+                        break;
+                    case false:
+                        doorAnimator.SetTrigger("close");
+                        doorCollider.enabled = true;
+                        doorOpen = false;
+                        break;
+                }
+                break;
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
