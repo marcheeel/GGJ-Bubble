@@ -263,7 +263,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: ef2fea1e4d371f64099352fb71f9cd82, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -312,8 +312,8 @@ MonoBehaviour:
   fingers: {fileID: 0}
   dragAndDrop: {fileID: 0}
   canMove: 0
-  movementSpeed: 5
-  jumpForce: 5
+  movementSpeed: 10
+  jumpForce: 12.5
   isGrounded: 0
   originalFormSprite: {fileID: 0}
   originalFormCollider: {fileID: 5523301550272937410}
