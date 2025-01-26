@@ -16,10 +16,13 @@ public class Dock : MonoBehaviour
     public int coinsNeeded;
     public bool doorOpen;
     [SerializeField] private bool somethingOnDock;
+    [SerializeField] private Animator dockAnimator;
     [SerializeField] private GameObject objectOnDock;
 
     private void Update()
     {
+        dockAnimator.SetBool("onDock", somethingOnDock);
+        
         switch (unlockedWithCoins)
         {
             // Con monedas
